@@ -1,28 +1,24 @@
 package cr.ac.una.controlfinanciero.DAO
 
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import cr.ac.una.controlfinanciero.entity.Movimiento
-import cr.ac.una.controlfinanciero.entity.Movimientos
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Path
 
+
+@Dao
 interface MovimientoDAO {
+    @Query("SELECT * FROM movimiento")
+    suspend fun getAllMovimientos(): List<Movimiento>
 
-    @GET("movimiento")
-    suspend fun getItems(): Movimientos
+    @Insert
+    suspend fun insertMovimiento(movimiento: Movimiento)
 
-    @GET("movimiento/{uuid}")
-    suspend fun getItem(@Path("uuid") uuid: String): Movimiento
+    @Update
+    suspend fun updateMovimiento(movimiento: Movimiento)
 
-    @POST("movimiento")
-    suspend fun createItem( @Body items: List<Movimiento>): Movimientos
-
-    @PUT("movimiento/{uuid}")
-    suspend fun updateItem(@Path("uuid") uuid: String, @Body item: Movimiento): Movimiento
-
-    @DELETE("movimiento/{uuid}")
-    suspend fun deleteItem(@Path("uuid") uuid: String)
+    @Delete
+    suspend fun deleteMovimiento(movimiento: Movimiento)
 }

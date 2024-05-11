@@ -9,7 +9,7 @@ object MovimientoController {
 
     suspend fun insertMovimiento(movimiento: Movimiento) {
         movimientos.add(movimiento) // Agregar el nuevo movimiento a la lista existente
-        movimientoService.apiService.createItem(movimientos)
+
     }
 
     fun deleteMovimiento(position: Int) {
